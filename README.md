@@ -1,2 +1,2 @@
 # JOLI
-JoLi (揪你), join me
+"JoLi (揪你), join me"
