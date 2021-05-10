@@ -30,10 +30,6 @@ const settings = {
           },
         },
       },
-      {
-        test: /\.json$/,
-        loader: 'json-loader',
-      },
     );
 
     config.plugins.push(
