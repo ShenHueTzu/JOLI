@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node ./server",
+    "dev": "node ./server.js",
     "build": "next build",
-    "start": "node ./server"
+    "start": "node ./server.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
+    "file-loader": "^6.2.0",
     "js-cookie": "^2.2.1",
     "next": "10.2.0",
     "prop-types": "^15.7.2",
@@ -19,6 +20,7 @@
     "react-dom": "17.0.2",
     "react-redux": "^7.2.4",
     "styled-components": "^5.2.3",
+    "url-loader": "^4.1.1",
     "webpack": "^5.36.2"
   }
 }
