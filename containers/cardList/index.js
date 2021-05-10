@@ -56,7 +56,7 @@ const cardList = ({ tabName }) => {
   const handleShare = () => {
     if (tabName === 'my-form') {
       const { uuid } = formList[activeId];
-      setLink(`/jolly/forms/${uuid}`)
+      setLink(`https://cryptic-crag-39318.herokuapp.com/jolly/forms/${uuid}`)
     }
     if (tabName === 'filled-form') {
       const { formUuid } = respList[activeId];

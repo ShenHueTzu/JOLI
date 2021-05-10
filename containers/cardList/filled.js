@@ -38,7 +38,7 @@ const cardList = () => {
 
   const handleShare = () => {
     const { uuid } = list[activeId];
-    setLink(`/jolly/forms/${uuid}`)
+    setLink(`https://cryptic-crag-39318.herokuapp.com/jolly/forms/${uuid}`)
     setType('share');
     setIsOpen(true);
   };
