@@ -3,7 +3,7 @@ const next = require('next');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 const isDev = process.env.ENV !== 'production';
 const app = next({ dev: isDev });
 const handle = app.getRequestHandler();
