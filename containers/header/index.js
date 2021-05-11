@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -18,6 +19,11 @@ const Header = () => {
   return (
     <Wrapper>
       <Inner>
+        <Head>
+          <title>JOLI</title>
+          <meta name="viewport" content="viewport-fit=cover" />
+          <meta charSet="utf-8" />
+        </Head>
         <Logo onClick={() => handleClick()}>揪哩 JOLI</Logo>
         {info && <Name>{`Hello, ${info.name}`}</Name>}
       </Inner>

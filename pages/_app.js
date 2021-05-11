@@ -1,7 +1,6 @@
 import React from 'react';
 import App from 'next/app';
-import Head from 'next/head';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import store from '../redux/store';
 
 import '../helpers/globalStyle.css';
@@ -23,11 +22,6 @@ class MainApp extends App {
 
     return (
       <Provider store={store}>
-        <Head>
-          <title>JOLI</title>
-          <meta name="viewport" content="viewport-fit=cover" />
-          <meta charSet="utf-8" />
-        </Head>
         <Component {...pageProps} />
       </Provider>
     );

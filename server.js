@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const compression = require('compression');
 
 const port = process.env.PORT || 8080;
-const isDev = process.env.ENV !== 'production' && process.env.ENV !== 'preparing' && process.env.ENV !== 'qa';
+const isDev = process.env.ENV !== 'production';
 const app = next({ dev: isDev });
 const handle = app.getRequestHandler();
 
