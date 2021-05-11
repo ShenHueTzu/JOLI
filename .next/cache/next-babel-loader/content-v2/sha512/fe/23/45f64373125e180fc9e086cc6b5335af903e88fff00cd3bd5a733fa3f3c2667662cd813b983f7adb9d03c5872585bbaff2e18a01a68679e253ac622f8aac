@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var HOST = 'http://j606888.com:3000';","map":{"version":3,"sources":["/Users/shen/JOLI/config/index.js"],"names":["HOST"],"mappings":"AAAA,OAAO,IAAMA,IAAI,GAAG,yBAAb","sourcesContent":["export const HOST = 'http://j606888.com:3000';"]},"metadata":{},"sourceType":"module"}
