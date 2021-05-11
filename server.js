@@ -1,7 +1,5 @@
 const express = require('express');
 const next = require('next');
-const cookieParser = require('cookie-parser');
-const compression = require('compression');
 
 const port = process.env.PORT || 5000;
 const isDev = process.env.ENV !== 'production';
@@ -11,9 +9,6 @@ const handle = app.getRequestHandler();
 (async () => {
   await app.prepare();
   const server = express();
-
-  server.use(compression());
-  server.use(cookieParser());
 
   server.get('*', (req, res) => {
     handle(req, res);
