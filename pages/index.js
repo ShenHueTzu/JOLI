@@ -8,7 +8,7 @@ import NavBar from '../containers/navBar';
 import CardList from '../containers/cardList';
 
 const Inner = styled.div`
-  padding: 100px;
+  padding: 60px 20px;
 `;
 
 const Page = () => {

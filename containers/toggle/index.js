@@ -4,13 +4,14 @@ import ToggleBtn from '../../components/toggle';
 
 const Toggle = ({ image, activeText, inactiveText, onChangeEvent }) => {
   const [isActive, setIsActive] = useState(false);
+
   const onClickEvent = () => {
-    onChangeEvent('required', !isActive);
+    onChangeEvent(!isActive);
     setIsActive(!isActive);
   };
 
   return (
-    <ToggleBtn isActive={isActive} onClick={() => onClickEvent()}>
+    <ToggleBtn isActive={isActive} onClick={onClickEvent}>
       <span>
         {image && <img {...images} />}
       </span>

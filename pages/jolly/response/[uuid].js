@@ -30,8 +30,6 @@ const Page = () => {
   const { singleform } = useSelector((state) => state.form);
   const { responses } = useSelector((state) => state.form);
 
-  console.log(responses);
-
   useEffect(() => {
     if (uuid) {
       dispatch(fetchSingleFormData({ uuid }));
@@ -49,7 +47,7 @@ const Page = () => {
             <tbody>
               {idx === 0 && (
                 <tr key={idx}>
-                  {res.map((title, idx) => <th key={idx}>{res}</th>)}
+                  {res.map((title, idx) => <th key={idx}>{title}</th>)}
                 </tr>
               )}
               {idx > 0 && (

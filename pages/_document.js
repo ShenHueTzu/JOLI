@@ -14,6 +14,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
+        {this.props.styleTags}
         <body>
           <Main />
           <NextScript />

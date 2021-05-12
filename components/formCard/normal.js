@@ -13,7 +13,7 @@ const Card = ({ id, activeId, title, times, response, sponser, options, handleCl
       </Upper>
       <Bottom>
         <span>{date}</span>
-        {response && <span><p>{response}</p> response(s)</span>}
+        {!!response && <span><p>{response}</p> response(s)</span>}
       </Bottom>
       {sponser && <Name>{sponser}</Name>}
       <img src="/icons/more.svg" alt="ic-more" onClick={handleClick} />

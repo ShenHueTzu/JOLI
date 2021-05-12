@@ -30,6 +30,22 @@ const Inner = () => {
     setData(data);
   };
 
+  const handleToggle = (key, value) => {
+    if (key === 'display_type') {
+      if (value) { value = 'public'; }
+      if (!value) { value = 'private'; }
+    }
+    if (key === 'expired_at') {
+      const today = new Date();
+      const tomorrow = new Date(today);
+      const timestamp = Math.floor(tomorrow / 1000);
+      value = timestamp;
+    }
+
+    data[key] = value;
+    setData(data);
+  };
+
   const handleSave = () => {
     dispatch(saveForm(data));
     router.push('/create-questions');
@@ -45,14 +61,14 @@ const Inner = () => {
       </InnerCon>
       <InnerCon>
         <h2>Response Setting</h2>
-        <Group><p>deadline</p> <Toggle activeText="ON" inactiveText="OFF" /></Group>
-        <Group><p>collect user name</p> <Toggle activeText="ON" inactiveText="OFF" /></Group>
+        <Group><p>deadline</p> <Toggle activeText="ON" inactiveText="OFF" onChangeEvent={(value) => handleToggle('expires_at', value)} /></Group>
+        <Group><p>collect user name</p> <Toggle activeText="ON" inactiveText="OFF" onChangeEvent={(value) => handleToggle('collectEmail', value)} /></Group>
       </InnerCon>
       <InnerCon>
         <h2>Permission Setting</h2>
-        <Group><p>View others response</p> <Toggle activeText="ON" inactiveText="OFF" /></Group>
-        <Group><p>Only submit once</p> <Toggle activeText="ON" inactiveText="OFF" /></Group>
-        <Group><p>Editable after submitting</p> <Toggle activeText="ON" inactiveText="OFF" /></Group>
+        <Group><p>View others response</p> <Toggle activeText="ON" inactiveText="OFF" onChangeEvent={(value) => handleToggle('display_type', value)} /></Group>
+        {/* <Group><p>Only submit once</p> <Toggle activeText="ON" inactiveText="OFF" /></Group> */}
+        <Group><p>Editable after submitting</p> <Toggle activeText="ON" inactiveText="OFF" onChangeEvent={(value) => handleToggle('allowEdit', value)} /></Group>
       </InnerCon>
       <BtnGroup>
         <Button

@@ -49,14 +49,16 @@ const cardList = ({ tabName }) => {
 
   const handleEdit = () => {
     console.log('edit');
+    setId(null);
   };
   const handlePreview = () => {
     console.log('preview');
+    setId(null);
   };
   const handleShare = () => {
     if (tabName === 'my-form') {
       const { uuid } = formList[activeId];
-      setLink(`https://cryptic-crag-39318.herokuapp.com/jolly/forms/${uuid}`)
+      setLink(`/jolly/forms/${uuid}`)
     }
     if (tabName === 'filled-form') {
       const { formUuid } = respList[activeId];
@@ -65,6 +67,7 @@ const cardList = ({ tabName }) => {
 
     setType('share');
     setIsOpen(true);
+    setId(null);
   };
   const handleReview = () => {
     const { uuid } = formList[activeId];
@@ -77,8 +80,9 @@ const cardList = ({ tabName }) => {
 
   const onDelete = () => {
     const { uuid } = list[activeId];
-    deleteForm({ uuid });
+    deleteForm({ dispatch, uuid });
     setIsOpen(false);
+    setId(null);
   };
 
   const handleCopy = () => {
@@ -87,6 +91,7 @@ const cardList = ({ tabName }) => {
     ele.setSelectionRange(0, 99999);
 
     document.execCommand('copy');
+    setId(null);
   };
 
   const options = [
@@ -148,7 +153,7 @@ const cardList = ({ tabName }) => {
         isOpen={isOpen}
         onClose={() => handleClose()}
       >
-        {type === 'delete' && <Delete formName={list[activeId].name} onDelete={onDelete} handleClose={handleClose} />}
+        {type === 'delete' && <Delete formName={activeId && list[activeId].name} onDelete={onDelete} handleClose={handleClose} />}
         {type === 'share' && <ShareLink value={link} handleCopy={handleCopy} />}
       </Popup>
     </Wrapper>

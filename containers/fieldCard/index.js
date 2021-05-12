@@ -11,7 +11,16 @@ import { Outer, Container, Row, Item } from './styled';
 
 const FieldComp = ({ indx, type, text, handleOptions }) => {
   if (type === 'text') return <TextField isDisabled />;
-  if (type === 'radio' || type === 'checkbox') return <SelectField type={type} indx={indx} text={text} handleOptions={handleOptions} />;
+  if (type === 'radio' || type === 'checkbox') {
+    return (
+      <SelectField
+        indx={indx}
+        type={type}
+        text={text}
+        handleOptions={handleOptions}
+      />
+    )
+  }
   if (type === 'paragraph') return <Textarea isDisabled />;
 };
 
@@ -52,7 +61,7 @@ const FieldCard = ({ indx, type, onChangeEvent, onDelete }) => {
         <Row>
           {/* <Button></Button> */}
           <Toggle
-            onChangeEvent={onChangeEvent}
+            onChangeEvent={(value) => onChangeEvent('required', value)}
             activeText="Required"
             inactiveText="Not Required"
           />

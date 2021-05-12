@@ -38,8 +38,7 @@ export const formListSlice = createSlice({
       };
     },
     saveuuid(state, action) {
-      const { uuid } = action.payload;
-      state.uuid = uuid;
+      state.uuid = action.payload;
     },
   },
   extraReducers: {

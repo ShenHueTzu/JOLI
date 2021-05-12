@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const Outer = styled.div`
-  width: 280px;
-  margin: 0 20px;
+  width: 260px;
+  height: 210px;
+  margin: 10px 20px;
 
   display: flex;
   flex-direction: column;

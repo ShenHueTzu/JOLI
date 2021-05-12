@@ -2,6 +2,8 @@ import Cookies from 'js-cookie';
 import { HOST } from '../config';
 import apiPath from '../constants/apiPath';
 
+import { fetchFormList } from '../redux/slices/formsSlice';
+
 let accessToken = Cookies.get('access_token');
 
 export const getFormList = () => {
@@ -62,7 +64,7 @@ export const createForm = (data) => {
   .catch((e) => console.log(e));
 };
 
-export const deleteForm = ({ uuid }) => {
+export const deleteForm = ({ uuid, dispatch }) => {
   const options = {
     method: 'DELETE',
     headers: new Headers({
@@ -72,7 +74,7 @@ export const deleteForm = ({ uuid }) => {
   };
   return fetch(`${HOST}${apiPath.forms.formList}/${uuid}`, options)
   .then((res) => res.json())
-  .then(() => getFormList())
+  .then(() => dispatch(fetchFormList()))
   .catch((e) => console.log(e));
 };
 

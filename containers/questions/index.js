@@ -38,21 +38,27 @@ const Inner = () => {
 
   const handleChange = (idx, key, value) => {
     selectors[idx][key] = value;
+    console.log(selectors);
   };
 
   const handleSubmit = () => {
+    console.log(selectors);
     const data = {
       ...formParams,
       blocks: selectors,
     };
     const resp = createForm(data);
-    if (resp) { dispatch(saveuuid(resp.uuid)) };
+    if (resp) {
+      dispatch(saveuuid(resp.uuid))
+      setTimeout(() => router.push('/'), [1000]);
+    };
   };
 
   return (
     <Wrapper>
       { selectors && selectors.map((select, idx) => (
         <FieldCard
+          key={idx}
           indx={1+ idx}
           type={select.blockType}
           onChangeEvent={(key, value) => handleChange(idx, key, value)}

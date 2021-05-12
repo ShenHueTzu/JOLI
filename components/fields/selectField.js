@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Field, Edit } from './styled';
 
-const SelectField = ({ type, text, indx, handleOptions }) => {
+const SelectField = ({ type, text, indx, blockId, isFilled, handleOptions, onChangeEvent }) => {
   const [isSelect, setIsSelect] = useState(false);
   const [value, setValue] = useState(text || 'option 1');
 
@@ -17,17 +17,31 @@ const SelectField = ({ type, text, indx, handleOptions }) => {
     }
   };
 
+  const handleSelect = (e) => {
+    let value = [];
+    if (type === 'radio') {
+      value = [e.target.value];
+      onChangeEvent(value);
+    }
+    if (type === 'checkbox') {
+      value = { data: e.target.value, checked: e.target.checked }
+      onChangeEvent(value);
+    }
+  };
+
   return (
     <Field>
-      <input type={type} />
-      {isSelect
-        ? <Edit
-            defaultValue={value}
-            onBlur={() => handleBlur()}
-            onChange={(e) => handleChange(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
-          />
-        : <label onClick={() => setIsSelect(true)}>{value}</label>}
+      <input type={type} value={value} name={type === 'radio' ? `group-${blockId}` : null} onChange={(e) => handleSelect(e)} />
+      {isFilled && <label>{value}</label>}
+      {!isFilled && isSelect && (
+        <Edit
+          defaultValue={value}
+          onBlur={() => handleBlur()}
+          onChange={(e) => handleChange(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
+        />
+      )}
+      {!isFilled && !isSelect && <label onClick={() => setIsSelect(true)}>{value}</label>}
     </Field>
   );
 };

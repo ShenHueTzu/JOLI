@@ -6,15 +6,15 @@ import SelectField from '../../components/fields/selectField';
 import Textarea from '../../components/fields/textarea';
 
 import data from './data';
-import { Outer, Container, Row } from './styled';
+import { Outer, Container, Row, Border } from './styled';
 
-const FieldComp = ({ indx, type, text, onChangeEvent }) => {
+const FieldComp = ({ indx, blockId, type, text, onChangeEvent }) => {
   if (type === 'text') return <TextField onChangeEvent={onChangeEvent} />;
-  if (type === 'radio' || type === 'checkbox') return <SelectField type={type} indx={indx} text={text} onChangeEvent={onChangeEvent} />;
+  if (type === 'radio' || type === 'checkbox') return <SelectField type={type} indx={indx} text={text} blockId={blockId} onChangeEvent={(value) => onChangeEvent(value)} isFilled />;
   if (type === 'paragraph') return <Textarea onChangeEvent={onChangeEvent} />;
 };
 
-const FieldCard = ({ indx, block, handleChange }) => {
+const FieldCard = ({ indx, block, handleChange, handleSelect }) => {
   const type = block.blockType;
 
   return (
@@ -24,18 +24,24 @@ const FieldCard = ({ indx, block, handleChange }) => {
         <img {...data[type].image} />
       </Container>
       <Container type="right">
-        <Row isFilled>
+        <Row isFilled isRequired={block.required}>
           <p>{block.title}</p>
-          <p>{block.required ? 'Required' : ''}</p>
+          { block.required && <Border>Required</Border>}
         </Row>
-        {(type === 'text' || type === 'paragraph') && <FieldComp type={type} onChangeEvent={(e) => handleChange(e, 'blockId', block.id)} />}
+        {(type === 'text' || type === 'paragraph') && (
+          <FieldComp
+            type={type}
+            onChangeEvent={(e) => handleChange(e, 'blockId', block.id)}
+          />
+        )}
         { block.options.map((ele, idx) => (
             <FieldComp
               key={idx}
-              onChangeEvent={() => handleChange(blockId, block.id)}
+              onChangeEvent={(value) => handleSelect(type, block.id, value)}
               type={type}
               text={ele}
               indx={idx}
+              blockId={block.id}
             />
           ))}
       </Container>

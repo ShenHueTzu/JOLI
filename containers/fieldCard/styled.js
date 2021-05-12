@@ -36,9 +36,20 @@ export const Container = styled.div`
 export const Row = styled.div`
   display: flex;
   justify-content: ${({ isFilled }) => isFilled ? 'flex-start' : 'flex-end'};
+  ${({ isRequired }) => isRequired && css`
+    justify-content: space-between;
+  `}
   img {
     width: 30px;
   }
+`;
+export const Border = styled.div`
+  background: #000000;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+}
 `;
 export const Item = styled.div`
   color: #999999;

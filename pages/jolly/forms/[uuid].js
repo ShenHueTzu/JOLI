@@ -27,18 +27,16 @@ const Page = () => {
     dispatch(fetchSingleFormData({ uuid }));
   }, [uuid]);
 
-  const [activeId, setId] = useState(null);
   const [response, setResponse] = useState([]);
 
   const handleSubmit = () => {
     submitForm(response, uuid);
-    setTimeout(() => router.push('/'), [10000]);
+    setTimeout(() => router.push('/'), [1000]);
   };
 
   const handleChange = (e, key, value) => {
-    setId(value);
     let block = { blockId: '', value: [] };
-    const activeBlock = response.findIndex((el) => el.blockId === activeId);
+    const activeBlock = response.findIndex((el) => el.blockId === value);
 
     if (activeBlock !== -1) {
       response[activeBlock]['value'] = [e.target.value];
@@ -51,13 +49,46 @@ const Page = () => {
     }
   };
 
+  const handleSelect = (type, id, value) => {
+    let block = {};
+    const activeBlock = response.findIndex((el) => el.blockId === id);
+
+    if (activeBlock !== -1) {
+      if (type === 'checkbox') {
+        if (value.checked) {
+          response[activeBlock].value.push(value.data);
+        } else {
+          response[activeBlock].value = response[activeBlock].value.filter((el) => el !== value.data);
+        }
+        setResponse([...response]);
+      }
+      if (type === 'radio') {
+        response[activeBlock].value = value;
+        setResponse([...response]);
+      }
+    } else {
+      if (type === 'checkbox') {
+        if (value.checked) {
+          block.blockId = id;
+          block.value = [value.data];
+          setResponse([...response, block]);
+        }
+      }
+      if (type === 'radio') {
+        block.blockId = id;
+        block.value = value;
+        setResponse([...response, block]);
+      }
+    }
+  };
+
   return (
     <>
       <Header />
       <NavBar type="form" name={singleform.name} handleSubmit={handleSubmit} />
       <Inner>
         <Message message={singleform.description} date={singleform.updatedAt} />
-        <Form blocks={singleform.Blocks} handleChange={handleChange} />
+        <Form blocks={singleform.Blocks} handleChange={handleChange} handleSelect={handleSelect} />
       </Inner>
     </>
   );
